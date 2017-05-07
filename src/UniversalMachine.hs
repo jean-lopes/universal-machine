@@ -110,13 +110,14 @@ listToString xs = "{" ++ body ++ "}"
 
 growTape :: Blank -> (Int, Tape) -> (Int, Tape)
 growTape blank (index, tape) = (n, fs)
-    where mustGrowLeft = index < 0
-          mustGrowRight = index > Seq.length tape
+    where lastIndex = Seq.length tape - 1
+          mustGrowLeft = index < 0
+          mustGrowRight = index >= lastIndex
           n = if mustGrowLeft then 0 else index
           fs = if mustGrowLeft
                     then Seq.replicate (abs index) blank >< tape
                     else if mustGrowRight
-                            then tape >< Seq.replicate (index - Seq.length tape) blank
+                            then tape >< Seq.replicate (index - lastIndex) blank
                             else tape
 
 mkTape :: Blank -> String -> Tape
@@ -226,13 +227,6 @@ step (UM tape machine index state) = do
         (newIndex, newTape) = growTape b (updatedIndex, updatedTape)
     Right $ UM newTape machine newIndex nextState
 
-u = mkUniversalMachine (M ss as 'b' ts "q0" fs) "00001" 0
-    where ss = Set.fromList ["q0","q1"]
-          as = Set.fromList "01b"
-          fs = Set.fromList ["q1"]
-          ts = [Transition "q0" '0' '1' ShiftRight "q0"
-               ,Transition "q0" '1' '1' ShiftRight "q1"]
-
 isFinal :: UniversalMachine -> Bool
 isFinal um = Set.member s $ finalStates m
     where m = machine um
@@ -269,5 +263,3 @@ view ((UM tp _ ix q):us) = do
     putStrLn ys
     putStrLn $ zs ++ " ^^^"
     view us
-
-
