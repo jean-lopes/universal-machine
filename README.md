@@ -39,21 +39,33 @@ Commentaries:
 ```
 symbol ::= char
 
-blank  ::= symbol
+blank ::= symbol
+
+input_symbol ::= symbol
+
+output_symbol ::= symbol
 
 alphabet ::= string
 
-identifier ::= (letter|_)(alphaNum|_)*
-
-states ::= {identifier(, identifier)*}
-
 shift ::= L|R
 
-transition ::= (identifier, 'char', 'char', shift, identifier)
+state ::= (letter|_)(alphaNum|_)*
+
+current_state ::= state
+
+new_state ::= state
+
+states ::= {state(, states)*}
+
+initial_state ::= state
+
+final_states ::= states
+
+transition ::= (current_state, input_symbol, output_symbol, shift, new_state)
 
 transitions ::= {transition(, transition)*}
 
-machine ::= M = (states, alphabet, blank, transitions, identifier, states)
+machine ::= M = (states, alphabet, blank, transitions, initial_state, final_states)
 ```
 Node: this is a minimal and informal DSL
 
