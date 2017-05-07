@@ -26,7 +26,7 @@ Windows: By default the executable will be located in the following directory: `
 `$ universal-machine (-h|--help)`
 
 `$ universal-machine (-t|--tape STRING) (-m|--machine FILE)`
-`STRING` is a normal string
+
 `FILE` is the path to the file with the `machine data`
 
 ## Machine DSL
