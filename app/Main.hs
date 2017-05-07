@@ -19,7 +19,7 @@ args = Args
         (  long    "machine"
         <> short   'm'
         <> metavar "FILE"
-        <> help    "The file with the machine data to be parsed.\nDSL: https://github.com/jean-lopes/calculator/tree/master/machine-examples/machine.dsl" )
+        <> help    "The file with the machine data to be parsed. DSL: https://github.com/jean-lopes/universal-machine#machine-dsl" )
 
 exec :: Args -> IO ()
 exec (Args ts mp) = do
