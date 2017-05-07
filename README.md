@@ -21,6 +21,7 @@ $ stack install
 ```
 
 Windows: By default the executable will be located in the following directory:
+
 `C:\Users\<your_user>\AppData\Roaming\local\bin\`
 
 ## Arguments
@@ -78,17 +79,22 @@ M =
 (
     //states
     {q0, q1, q2}
+    
     //alphabet
     , "01b"
+    
     //blank
     , 'b'
+    
     //transitions
-    , { (q0,'0','1',R,q1)
-      , (q1,'0','1',R,q1)
-      , (q1,'1','0',R,q1)
-      , (q1,'b','b',L,q2) }
+    , { (q0, '0', '1', R, q1)
+      , (q1, '0', '1', R, q1)
+      , (q1, '1', '0', R, q1)
+      , (q1, 'b', 'b', L, q2) }
+      
     //initial state
     , q0
+    
     //final states
     , {q2}
 )
@@ -109,7 +115,7 @@ State: q1
 +---+---+---+
 | 1 | 1 | b |
 +---+---+---+
-  ^^^
+     ^^^
 
 State: q1
 +---+---+---+
