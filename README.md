@@ -20,7 +20,8 @@ $ stack build
 $ stack install
 ```
 
-Windows: By default the executable will be located in the following directory: `C:\Users\<your_user>\AppData\Roaming\local\bin\`
+Windows: By default the executable will be located in the following directory:
+`C:\Users\<your_user>\AppData\Roaming\local\bin\`
 
 ## Arguments
 `$ universal-machine (-h|--help)`
