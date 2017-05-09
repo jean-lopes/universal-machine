@@ -1,4 +1,4 @@
-module UniversalMachine (
+module UniversalMachine {- (
     Symbol,
     Blank,
     Alphabet,
@@ -12,7 +12,7 @@ module UniversalMachine (
     mkUniversalMachine,
     eval,
     view
-) where
+) -} where
 import Prelude hiding (index)
 import Data.List as List
 import Data.Set as Set hiding (toList)
@@ -83,8 +83,7 @@ instance Show UniversalMachine where
               ms = show $ machine um
               ts = show $ tape um
 
-data RunTimeError = UnknowRunTimeError
-                  | TapeIndexOutOfBound Int
+data RunTimeError = TapeIndexOutOfBound Int
                   | NoSuchTransition State Symbol
                   | MultipleTransitionsFound State Symbol [Transition]
                   | AlphabetTooShort
@@ -92,7 +91,6 @@ data RunTimeError = UnknowRunTimeError
                   | UndeclaredState Location SetOfStates State
 
 instance Show RunTimeError where
-    show UnknowRunTimeError = "Unknow runtime error."
     show (TapeIndexOutOfBound n) = "Tape index out of bound. (index: " ++ show n ++ ")"
     show (NoSuchTransition st s) = "No transition found for state " ++ st ++ " with input symbol " ++ show s ++ "."
     show (MultipleTransitionsFound st s ts) = "Multiple transitions found for state " ++ st ++ " with input symbol of " ++ show s ++ ". (transitions: " ++ listToString ts ++ ")"
@@ -234,7 +232,7 @@ isFinal um = Set.member s $ finalStates m
 
 type LogWriterT = WriterT [UniversalMachine] (Either RunTimeError)
 
-runStep :: StateT UniversalMachine LogWriterT UniversalMachine
+runStep :: StateT UniversalMachine (WriterT [UniversalMachine] (Either RunTimeError)) UniversalMachine
 runStep = do
     um <- get >>= lift . lift . step
     lift $ tell [um]
